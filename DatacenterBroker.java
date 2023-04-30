@@ -6,7 +6,7 @@
  * Copyright (c) 2009-2012, The University of Melbourne, Australia
  */
 
-package org.cloudbus.cloudsim;
+package org.cloudbus.cloudsim.examples;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +15,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.cloudbus.cloudsim.Cloudlet;
+import org.cloudbus.cloudsim.DatacenterCharacteristics;
+import org.cloudbus.cloudsim.Log;
+import org.cloudbus.cloudsim.Vm;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEntity;
@@ -674,7 +678,7 @@ public class DatacenterBroker extends SimEntity {
 			idx=(idx+1)%vmNum;
 		}*/
 		
-		// ready time for each machinel intially to be 0 //
+		// ready time for each machine initially to be 0 //
 		Double[] readyTime = new Double[vmNum];
 		for (int i = 0; i < readyTime.length; i++) {
 			readyTime[i] = 0.0;
@@ -810,9 +814,9 @@ public class DatacenterBroker extends SimEntity {
 	
 	private static void print2DArrayList(List<List<Double>> table) {
 		 String indent="           ";
-		 System.out.println("The current required exceution time matrx is as below,with size of "+ table.size()+" by "+table.get(0).size());
+		 System.out.println("The current required exceution time matrix is as below,with size of "+ table.size()+" by "+table.get(0).size());
 		 //System.out.printf(indent);
-		 for(int j=0;j<vmNum;j++)
+		 for(int j=0;j<vmNum + 1;j++)
 		 {
 			 System.out.printf("    Vm"+j+indent);
 		 }

@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.CloudletSchedulerSpaceShared;
 import org.cloudbus.cloudsim.Datacenter;
-import org.cloudbus.cloudsim.DatacenterBroker;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
 import org.cloudbus.cloudsim.Host;
 import org.cloudbus.cloudsim.Log;
@@ -83,9 +83,12 @@ public class ExtendedExample {
 			//bind the cloudlets to the vms. This way, the broker
 			//will submit the bound cloudlets to VMs that aim to 
 			//minimize the total execution time.
-			
+			long startTime = System.nanoTime();
 			broker.bindCloutletToVmsSuffrage();
-
+			long endTime = System.nanoTime();
+			long runTime = endTime = startTime;
+			long convertedTime = TimeUnit.SECONDS.convert(runTime, TimeUnit.NANOSECONDS);
+			Log.printLine("Algorithm Runtime: " + convertedTime + " seconds");
 
 			// Sixth step: Starts the simulation
 			CloudSim.startSimulation();
@@ -102,6 +105,9 @@ public class ExtendedExample {
 			//datacenter0.printDebts();
 
 			Log.printLine("ExtendedExample finished!");
+			//responseTime calculation
+//			cloudlet.getFinishTime()
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -260,13 +266,22 @@ public class ExtendedExample {
 			if (cloudlet.getCloudletStatus() == Cloudlet.SUCCESS){
 				Log.print("SUCCESS");
 
-				Log.printLine( indent + indent + cloudlet.getResourceId() + indent + indent + indent + cloudlet.getVmId() +
-						indent + indent + dft.format(cloudlet.getActualCPUTime()) + indent + indent + dft.format(cloudlet.getExecStartTime())+
+				Log.printLine( 
+						indent + indent + cloudlet.getResourceId() + 
+						indent + indent + 
+						indent + cloudlet.getVmId() +
+						indent + indent + dft.format(cloudlet.getActualCPUTime())+
+//						":this is the ActualCPUTime" +
+						
+						indent + indent + dft.format(cloudlet.getExecStartTime())+
+//						":this is the getExecStartTime" +
+						
 						indent + indent + dft.format(cloudlet.getFinishTime()));
+//						":this is the getFinishTime");
 			}
 		}
-
 	}
+	
 	
 	
 }
